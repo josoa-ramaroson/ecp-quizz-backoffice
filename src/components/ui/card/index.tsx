@@ -3,30 +3,32 @@ import { clsx } from 'clsx';
 
 type TCardProps = {
   header?: ReactNode;
-  content?: ReactNode;
+  descriptions?: ReactNode;
   footer?: ReactNode;
   headerClassName?: string;
-  contentClassName?: string;
+  descriptionClassName?: string;
   footerClassName?: string;
   className?: string;
   children?: ReactNode;
+  contentContainerClassName?: string;
 }
 
 export default function Card ({ 
   className, 
   header, 
-  content, 
+  descriptions, 
   footer, 
   headerClassName,
-  contentClassName,
+  descriptionClassName,
   footerClassName,
+  contentContainerClassName,
   children 
 }: TCardProps) {
   return (
     <div 
       className={clsx(
-        "bg-surface p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300", 
-        className
+        className,
+        "bg-surface p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
       )}  
     >
       {header && (
@@ -34,14 +36,15 @@ export default function Card ({
           {header}
         </div>
       )}
-      
-      {content && (
-        <div className={clsx("space-y-6", contentClassName)}>
-          {content}
-        </div>
-      )}
-      
-      {children}
+        {descriptions && (
+          <div className={clsx("space-y-6 text-secondary-600", descriptionClassName)}>
+            {descriptions}
+          </div>
+        )}
+        
+      <div className={contentContainerClassName}>
+        {children}
+      </div>
       
       {footer && (
         <div className={clsx("mt-6 pt-4 border-t border-secondary-100", footerClassName)}>

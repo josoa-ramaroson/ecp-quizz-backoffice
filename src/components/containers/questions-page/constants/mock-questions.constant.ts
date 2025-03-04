@@ -1,0 +1,113 @@
+import { EQuestionType } from "@/enums";
+import { IQuestion } from "@/interfaces";
+
+export const mockQuestions: IQuestion[] = [
+  {
+    _id: "1",
+    title: "Present Perfect vs. Past Simple",
+    description: "Choose the correct tense to complete each sentence.",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    answersOptions: [
+      { text: "I have lived in London for 10 years.", isCorrect: true },
+      { text: "I lived in London for 10 years.", isCorrect: false },
+      { text: "I have been living in London for 10 years.", isCorrect: false },
+      { text: "I was living in London for 10 years.", isCorrect: false },
+    ],
+    score: 5,
+    creationDate: new Date("2023-10-15"),
+  },
+  {
+    _id: "2",
+    title: "Phrasal Verbs with 'Get'",
+    description: "Match the phrasal verb with its correct meaning.",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    answersOptions: [
+      { text: "Get along", isCorrect: true },
+      { text: "Get away", isCorrect: false },
+      { text: "Get by", isCorrect: false },
+      { text: "Get over", isCorrect: false },
+    ],
+    score: 3,
+    creationDate: new Date("2023-11-20"),
+  },
+  {
+    _id: "3",
+    title: "Conditional Sentences",
+    description: "Identify the type of conditional sentence.",
+    type: EQuestionType.SINGLE_CHOICE,
+    answersOptions: [
+      { text: "Zero Conditional", isCorrect: false },
+      { text: "First Conditional", isCorrect: false },
+      { text: "Second Conditional", isCorrect: true },
+      { text: "Third Conditional", isCorrect: false },
+    ],
+    score: 4,
+    creationDate: new Date("2023-12-05"),
+  },
+  {
+    _id: "6",
+    title: "Modal Verbs",
+    description: "Choose the correct modal verb to complete each sentence.",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    answersOptions: [
+      { text: "can", isCorrect: true },
+      { text: "could", isCorrect: false },
+      { text: "may", isCorrect: false },
+      { text: "might", isCorrect: true },
+    ],
+    score: 4,
+    creationDate: new Date("2024-02-08"),
+  },
+  {
+    _id: "7",
+    title: "Prepositions of Time",
+    description: "Fill in the blanks with the correct preposition.",
+    type: EQuestionType.SINGLE_CHOICE,
+    answersOptions: [
+      { text: "in", isCorrect: true },
+      { text: "on", isCorrect: false },
+      { text: "at", isCorrect: false },
+      { text: "during", isCorrect: false },
+    ],
+    score: 3,
+    creationDate: new Date("2024-02-20"),
+  },
+  {
+    _id: "8",
+    title: "Relative Clauses",
+    description: "Identify the type of relative clause in each sentence.",
+    type: EQuestionType.SINGLE_CHOICE,
+    answersOptions: [
+      { text: "Defining", isCorrect: true },
+      { text: "Non-defining", isCorrect: false },
+    ],
+    score: 4,
+    creationDate: new Date("2024-03-05"),
+  },
+  {
+    _id: "9",
+    title: "Gerunds and Infinitives",
+    description: "Choose whether to use a gerund or infinitive in each sentence.",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    answersOptions: [
+      { text: "Gerund", isCorrect: true },
+      { text: "Infinitive", isCorrect: false },
+    ],
+    score: 5,
+    creationDate: new Date("2024-03-18"),
+  },
+  {
+    _id: "10",
+    title: "Future Tenses",
+    description: "Select the correct future tense for each context.",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    answersOptions: [
+      { text: "Future Simple", isCorrect: true },
+      { text: "Future Continuous", isCorrect: false },
+      { text: "Future Perfect", isCorrect: true },
+      { text: "Future Perfect Continuous", isCorrect: false },
+    ],
+    score: 6,
+    creationDate: new Date("2024-04-02"),
+  },
+];

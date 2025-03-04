@@ -1,5 +1,5 @@
 "use client"
-import { QuizzesPage } from '@/containers'
+import { QuizzesPage } from '@/components'
 import { authHoc } from '@/lib'
 
 function Page() {

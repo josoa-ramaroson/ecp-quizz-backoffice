@@ -1,10 +1,11 @@
 import Card from "./card";
-import Button from "./button";
+import Button from "./custom-button";
 import Footer from "./footer";
 import Heading from "./heading";
-import Input from "./input";
+import Input from "./custom-input";
 import { Divider } from "./divider";
-
+import { MetricCard } from "./metric-card";
+import { Badge } from "./badge";
 
 export { 
     Button, 
@@ -13,4 +14,6 @@ export {
     Footer,
     Input,
     Divider,
+    MetricCard,
+    Badge,
 };

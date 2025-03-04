@@ -24,9 +24,9 @@ export function AuthProvider({children}: TAuthProvider) {
     useEffect(()=>{
         LocalStorageService.setItem<string | null>(ELocalStorageKey.ACCESS_TOKEN, accessToken);
         if (accessToken)
-            router.push("/quizzes");
-    }, [accessToken]);
-
+            router.push("/dashboard");
+    }, [accessToken, router]);
+    
     return (
         <>
             {children}

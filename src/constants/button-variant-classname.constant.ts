@@ -15,7 +15,7 @@ export const BUTTON_VARIANT_CLASSNAME: TButtonVariantStyle  = {
         disabled: "border border-secondary-200 bg-transparent text-secondary-400 cursor-not-allowed",
       },
       [EButtonVariant.GHOST]: {
-        enabled: "bg-transparent hover:bg-secondary-100 text-secondary-700 focus:ring-secondary-500",
+        enabled: "bg-transparent hover:bg-secondary-100 text-secondary-700 hover:bg-accent hover:text-accent-foreground focus:ring-secondary-500",
         disabled: "bg-transparent text-secondary-400 cursor-not-allowed",
       },
       [EButtonVariant.LINK]: {

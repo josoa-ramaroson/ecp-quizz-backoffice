@@ -1,9 +1,8 @@
 "use client"
-import { LoginPage } from '@/containers'
+import { LoginPage } from '@/components'
 import { AuthServices } from '@/services'
 import { useTokenStore } from '@/store';
 import { TLoginFormData } from '@/types'
-import { useRouter } from 'next/navigation';
 
 export default function Page() {
 
