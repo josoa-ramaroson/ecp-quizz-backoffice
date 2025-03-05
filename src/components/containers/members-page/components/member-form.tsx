@@ -8,12 +8,12 @@ import {
     FormMessage 
 } from '@/components/ui/form'
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, UseFormReturn } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
-import { formSchema, IFormSchema } from '../constants'
+import { IMemberFormSchema } from '../constants'
 import { EMemberRole } from '@/enums'
 import { 
     SelectItem, 
@@ -24,55 +24,30 @@ import {
  } from '@/components/ui/select'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { cn } from '@/lib'
-import toast from 'react-hot-toast'
-
-
 
 interface IAddMemberForm {
-    submitHandler: (values: IFormSchema) => Promise<void>
+    reactHookForm: UseFormReturn<IMemberFormSchema, any, undefined>,
+    onSubmit: (values: IMemberFormSchema ) => Promise<void>,
+    isSubmitting: boolean,
+    submitLabel: string,
 }
-export default function AddMemberForm({ submitHandler }: IAddMemberForm) {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+
+export default function MemberForm({ 
+    reactHookForm,
+    onSubmit,
+    isSubmitting,
+    submitLabel,
+}: IAddMemberForm) {
+    
     const [showPassword, setShowPassword] = useState(false);
-    const reactHookForm  = useForm<IFormSchema>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            firstname: "",
-            facebookName: "",
-            email: "",
-            newPassword: "123456789",
-            confirmPassword: "",
-            role: EMemberRole.MEMBER,
-        },
-    });
 
-    const onSubmit = async (values: IFormSchema) => {
-        setIsSubmitting(true);
-        try {
-            await submitHandler(values);
-            toast.success("Member added successfully!");
-            reactHookForm.reset({
-                firstname: "",
-                facebookName: "",
-                email: "",
-                newPassword: "123456789",
-                confirmPassword: "",
-                role: EMemberRole.MEMBER,
-            });
-        } catch (error) {
-            console.error("Error submitting form:", error);
 
-            toast.error("Failed to create question. Please try again."); 
-        } finally {
-            setIsSubmitting(false);
-        }
-    }
     return (
             <Form {...reactHookForm}>
                 <form onSubmit={reactHookForm.handleSubmit(onSubmit)}>
                     <FormField
                         control={reactHookForm.control}
-                        name='firstname'
+                        name='firstName'
                         render={({ field }) => (
                             <FormItem className='mb-4'>
                                 <FormLabel>First Name</FormLabel>
@@ -143,7 +118,7 @@ export default function AddMemberForm({ submitHandler }: IAddMemberForm) {
                                 <FormLabel>New Password</FormLabel>
                                 <FormControl>
                                     <div className='flex items-center relative'>
-                                        <Input type="password"  placeholder="Member's password" {...field} />
+                                        <Input type={showPassword? "text": "password"}  placeholder="Member's password" {...field} />
                                         <button
                                             type="button"
                                             className="absolute right-3 text-gray-500"
@@ -184,7 +159,7 @@ export default function AddMemberForm({ submitHandler }: IAddMemberForm) {
                             Creating...
                         </>
                     ) : (
-                        "Add Member"
+                        submitLabel
                     )}
                     </Button>
                 </form>

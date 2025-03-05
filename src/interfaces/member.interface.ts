@@ -6,6 +6,5 @@ export interface IMember {
     firstName: string
     facebookName: string
     role: EMemberRole
-    password: string
     totalScore: number
   }

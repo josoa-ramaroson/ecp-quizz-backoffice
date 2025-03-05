@@ -25,29 +25,47 @@ import { cn } from '@/lib'
 import { v4 as uuidv4 } from "uuid";
 import AddAnswersOptionsSections from './add-answers-options-section'
 import toast from 'react-hot-toast'
-import { TQuestionFormData } from '@/types'
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
+import { IQuestion } from '@/interfaces'
 
-
+const DEFAULT_ANSWERS = [
+    { id: uuidv4(), text: "", isCorrect: false },
+    { id: uuidv4(), text: "", isCorrect: false },
+  ];
+  
+const DEFAULT_VALUES = {
+title: "",
+description: "",
+type: EQuestionType.MULTIPLE_CHOICE,
+score: 0,
+comment: "",
+answersOptions: DEFAULT_ANSWERS,
+};
 
 interface IAddQuestionFormProps {
-    submitHandler: (values: TQuestionFormData) => Promise<void>;
+    submitHandler: (values: TQuestionFormSchema) => Promise<void>;
+    buttonLabel: string,
+    question?: IQuestion
 }
-export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps) {
+export default function QuestionForm({ 
+    submitHandler,
+    buttonLabel,
+    question 
+}: IAddQuestionFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-
+    
     const reactHookForm  = useForm<TQuestionFormSchema>({
         resolver: zodResolver(questionFormSchema),
         defaultValues: {
-            title: "",
-            description: "",
-            type: EQuestionType.MULTIPLE_CHOICE,
-            score: 0,
-            comment: "",
-            answersOptions: [
-                { text: "", isCorrect: false },
-                { text: "", isCorrect: false },
+            title: question ? question.title : "",
+            description: question ? question.description : "",
+            type: question? question.type : EQuestionType.MULTIPLE_CHOICE,
+            score: question ? question.score : 0,
+            comment: question? question.comment : "",
+            answersOptions: question ? question.answersOptions.map((q) => ({...q, id: uuidv4()})) : [
+                { id: uuidv4(), text: "", isCorrect: false },
+                { id: uuidv4(), text: "", isCorrect: false },
             ],
         },
     });
@@ -70,10 +88,10 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
                 ]);
                 break;
             default:
-                if (reactHookForm.getValues("answersOptions").length < 2) {
+                if (reactHookForm.getValues("answersOptions").length <= 2) {
                     reactHookForm.setValue("answersOptions",[
                         { id: uuidv4(), text: "", isCorrect: false },
-                        { id:uuidv4(), text: "", isCorrect: false },
+                        { id: uuidv4(), text: "", isCorrect: false },
                     ]);
                 }
                 break;
@@ -108,7 +126,7 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
           answer.id === id ? { ...answer, text: value } : answer
         );
         
-        reactHookForm.setValue("answersOptions", updatedAnswers);
+        reactHookForm.setValue("answersOptions", updatedAnswers, { shouldValidate: true });
         
         // If typing in the last field and it's not empty, add a new empty field
         const isLastAnswer = id === currentAnswers[currentAnswers.length - 1].id;
@@ -117,15 +135,13 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
         }
     };
 
-    const onSubmit = async (data: TQuestionFormData) => {
+    const onSubmit = async (data: TQuestionFormSchema) => {
         setIsSubmitting(true);
         
         try {
           // Simulate API call
             await submitHandler(data);
-            console.log("Form submitted:", data);
-            toast.success("Question created successfully!");
-            
+          
             // Reset form
             reactHookForm.reset({
                 title: "",
@@ -134,8 +150,8 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
                 score: 0,
                 comment: "",
                 answersOptions: [
-                    { text: "", isCorrect: false },
-                    { text: "", isCorrect: false },
+                    { id: uuidv4(), text: "", isCorrect: false },
+                    { id: uuidv4(), text: "", isCorrect: false },
                 ],
             });
         } catch (error) {
@@ -168,7 +184,7 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
     };
     return (
         <Form {...reactHookForm}>
-            <form onSubmit={reactHookForm.handleSubmit(onSubmit)}>
+            <form onSubmit={reactHookForm.handleSubmit(onSubmit, (error) => console.log(error))}>
                 <FormField
                     control={reactHookForm.control}
                     name='title'
@@ -204,7 +220,12 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
                         <FormItem>
                             <FormLabel>Score</FormLabel>
                             <FormControl>
-                                <Input type='number' placeholder="ex:  0, 1, 5" {...field} />
+                                <Input 
+                                    type='number' placeholder="ex:  0, 1, 5" 
+                                    
+                                    {...field}
+                                    onChange={(e) => field.onChange(e.target.value ? parseFloat(e.target.value ): null)}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -245,6 +266,7 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
                     removeAnswer={removeAnswer}
                     addAnswer={addAnswer}
                     formError={reactHookForm.formState.errors.answersOptions?.message}
+                    errors={reactHookForm.formState.errors}
                 />
                 <FormField
                     control={reactHookForm.control}
@@ -271,7 +293,7 @@ export default function AddQuestionForm({ submitHandler }: IAddQuestionFormProps
                         Creating...
                         </>
                     ) : (
-                        "Create Question"
+                        buttonLabel
                     )}
                 </Button>
             </form>

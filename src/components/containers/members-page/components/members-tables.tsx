@@ -7,14 +7,16 @@ import {
     Table,
 } from '@/components/ui/table'
 import { IMember } from '@/interfaces'
-import { flexRender, type Table as TTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, type Table as TTable } from '@tanstack/react-table'
 import React from 'react'
-import { memberColumn } from '../constants'
 
 interface IMemberTableProps {
-    table:  TTable<IMember>
+    table:  TTable<IMember>,
+    memberColumn: ColumnDef<IMember>[]
 }
-export default function MembersTable({ table }: IMemberTableProps) {
+export default function MembersTable({ table, memberColumn }: IMemberTableProps) {
+
+  
   return (
     <div className="rounded-md border">
         <Table>

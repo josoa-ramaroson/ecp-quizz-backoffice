@@ -1,13 +1,13 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { IQuestion } from '@/interfaces'
-import { flexRender, Table as TTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, Table as TTable } from '@tanstack/react-table'
 import React from 'react'
-import { questionColumns } from '../constants'
 
 interface IQuestionsTableProps {
-  table:  TTable<IQuestion>
+  table:  TTable<IQuestion>,
+  questionColumns: ColumnDef<IQuestion>[]
 }
-export default function QuestionsTable({ table }: IQuestionsTableProps) {
+export default function QuestionsTable({ table, questionColumns }: IQuestionsTableProps) {
   return (
     <div className="rounded-md border">
         <Table>

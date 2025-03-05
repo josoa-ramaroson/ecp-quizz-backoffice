@@ -32,4 +32,15 @@ export class AuthServices {
                 throw new Error(EErrorMessage.UNKOWN_ERROR);
         }
     }
+
+    async delete(id: string): Promise<void> {
+        try {
+            await this.api.delete(`members/${id}`);
+        } catch (error) {
+            if (error instanceof Error)
+                throw new Error(error.message);
+            else 
+                throw new Error(EErrorMessage.UNKOWN_ERROR);
+        }
+    }
 }

@@ -15,7 +15,6 @@ import Link from "next/link";
 export 
 const Navbar = ({ isOpen, pathname }: { isOpen: boolean, pathname: string }) => {
 
-    const [isQuizSubmenuOpen, setIsQuizSubmenuOpen] = useState(false)
 
     return (
         <nav className="flex-1 overflow-y-auto p-2">
@@ -47,38 +46,8 @@ const Navbar = ({ isOpen, pathname }: { isOpen: boolean, pathname: string }) => 
             href="/dashboard/quizzes"
             isActive={pathname.startsWith("/dashboard/quizzes")}
             isCollapsed={!isOpen}
-            hasSubmenu={true}
-            isSubmenuOpen={isQuizSubmenuOpen}
-            toggleSubmenu={() => setIsQuizSubmenuOpen(!isQuizSubmenuOpen)}
           />
-          {isOpen && isQuizSubmenuOpen && (
-            <ul className="ml-6 mt-1 space-y-1">
-              <li>
-                <Link
-                  href="/dashboard/quizzes/create"
-                  className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-secondary-700 hover:bg-secondary-100"
-                >
-                  <span>Create Quiz</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard/quizzes/active"
-                  className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-secondary-700 hover:bg-secondary-100"
-                >
-                  <span>Active Quizzes</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard/quizzes/completed"
-                  className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-secondary-700 hover:bg-secondary-100"
-                >
-                  <span>Completed Quizzes</span>
-                </Link>
-              </li>
-            </ul>
-          )}
+        
           <SidebarItem
             icon={BarChart3}
             label="Reports & Analytics"
