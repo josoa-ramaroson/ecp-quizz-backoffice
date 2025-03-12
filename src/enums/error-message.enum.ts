@@ -12,5 +12,5 @@ export enum EErrorMessage {
     NOT_FOUND_ERROR = "Resource not found",
     INTERNAL_SERVER_ERROR = "Internal server error - Try again later",  
 
-    UNKOWN_ERROR = "An unknown error occurred",
+    UNKNOWN_ERROR = "An unknown error occurred",
 }

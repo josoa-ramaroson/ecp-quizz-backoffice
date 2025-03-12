@@ -10,10 +10,9 @@ import { IModifyMemberFormSchema, IAddMemberFormSchema } from './constants'
 import { AddMemberDialog, MembersSection } from './components'
 import { useEffect, useState } from 'react'
 import { IMember } from '@/interfaces'
-import { membersServices } from '@/services';
-import toast from 'react-hot-toast'
 import { TAddMemberFormData, TModifyMemberFormData } from '@/types'
-import { handleApiExceptions } from '@/lib'
+import { handleApiExceptions } from '@/lib/utils'
+import { MembersService } from '@/lib/services'
 
 export default function MembersPage() {
     const [members, setMembers] = useState<IMember[]>([]);
@@ -23,7 +22,7 @@ export default function MembersPage() {
     }, []);
 
     const fetchMembers = async () => {
-        const data: IMember[] = await membersServices.findAllMembers();
+        const data: IMember[] = await MembersService.findAll();
         setMembers(data);
     }
 
@@ -36,7 +35,7 @@ export default function MembersPage() {
           role: values.role,
         };
         
-        const newMember = await membersServices.createMember(member);
+        const newMember = await MembersService.create(member);
         setMembers((curr) => [...curr, newMember]);
         
     };
@@ -51,13 +50,13 @@ export default function MembersPage() {
             role: values.role,
           };
           handleApiExceptions(async ()=>{
-              const updatedMember = await membersServices.updateMember(member);
+              const updatedMember = await MembersService.update(member);
               setMembers((curr) => curr.map((member) => member._id === updatedMember._id ? updatedMember : member));
           })
     }
     const handleDelete = async (id: string) => {
         handleApiExceptions(async ()=>{
-            await membersServices.delete(id);
+            await MembersService.delete(id);
             setMembers((curr) => curr.filter((member) => member._id !== id));
         })
     }

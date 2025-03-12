@@ -43,11 +43,11 @@ export default function MembersTable({ table, memberColumn }: IMemberTableProps)
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={memberColumn.length} className="h-24 text-center">
+              <tr>
+                <td colSpan={memberColumn.length} className="h-24 text-center">
                   No results.
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
           </TableBody>
         </Table>

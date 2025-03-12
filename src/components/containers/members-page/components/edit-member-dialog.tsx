@@ -9,10 +9,10 @@ import {
 import { Plus } from "lucide-react"
 import MemberForm from "./member-form"
 import { BUTTON_VARIANT_CLASSNAME } from "@/constants"
-import { cn } from "@/lib"
+import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { modifyFormSchema, IModifyMemberFormSchema } from "../constants"
-import { EMemberRole } from "@/enums"
+import { EMemberRole, EToastMessage } from "@/enums"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -49,7 +49,7 @@ export default function EditMemberDialog({
       
           await submitHandler(member._id, values);
           setIsOpen(false);
-          toast.success("Member updated successfully!");
+          toast.success(EToastMessage.MEMBER_UPDATED);
           reactHookForm.reset({
               firstName: "",
               facebookName: "",
@@ -61,7 +61,7 @@ export default function EditMemberDialog({
       } catch (error) {
           console.error("Error submitting form:", error);
 
-          toast.error("Failed to update member. Please try again."); 
+          toast.error(EToastMessage.FAILED_TO_UPDATE_MEMBER); 
       } finally {
           setIsSubmitting(false);
       }

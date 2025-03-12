@@ -1,11 +1,10 @@
 import type { LucideIcon } from "lucide-react"
 import { ArrowUpIcon, ArrowDownIcon } from "lucide-react"
-import { cn } from "@/lib"
+import { cn } from "@/lib/utils"
 
 interface MetricCardProps {
   title: string
-  value: string
-  change?: string
+  value: number
   trend?: "up" | "down" | "neutral"
   icon: LucideIcon
   color?: "primary" | "secondary" | "accent" | "success" | "warning" | "error"
@@ -14,7 +13,6 @@ interface MetricCardProps {
 export function MetricCard({
   title,
   value,
-  change,
   trend = "neutral",
   icon: Icon,
   color = "primary",
@@ -28,11 +26,6 @@ export function MetricCard({
     error: "bg-error-50 text-error-600",
   }
 
-  const trendClasses = {
-    up: "text-success-600",
-    down: "text-error-600",
-    neutral: "text-secondary-500",
-  }
 
   return (
     <div className="rounded-lg border bg-surface p-6 shadow-sm">
@@ -44,13 +37,6 @@ export function MetricCard({
       </div>
       <div className="mt-2">
         <p className="text-3xl font-bold">{value}</p>
-        {change && (
-          <p className={cn("mt-1 flex items-center text-xs", trendClasses[trend])}>
-            {trend === "up" && <ArrowUpIcon className="mr-1 h-3 w-3" />}
-            {trend === "down" && <ArrowDownIcon className="mr-1 h-3 w-3" />}
-            {change}
-          </p>
-        )}
       </div>
     </div>
   )

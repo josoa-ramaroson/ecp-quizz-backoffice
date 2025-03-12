@@ -2,14 +2,14 @@
 
 import { Button } from '@/components/ui';
 import { EButtonSize, EButtonVariant } from '@/enums';
-import { useTokenStore } from '@/store';
+import { useAccessToken } from '@/store';
 import { LogOut } from 'lucide-react';
 import React from 'react'
 type TLogoutButtonProps = { 
     isOpen: boolean;
 }
 export default function LogoutButton({ isOpen }: TLogoutButtonProps) {
-  const setAccessToken = useTokenStore((state) => state.setAccessToken);
+  const setAccessToken = useAccessToken((state) => state.setAccessToken);
   const handleLogout = () => {
     setAccessToken(null);
   }

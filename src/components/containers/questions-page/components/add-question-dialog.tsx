@@ -6,17 +6,15 @@ import QuestionForm from './question-forms'
 import { TQuestionFormSchema } from '../constants'
 import { Plus } from 'lucide-react'
 import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
-import { cn } from '@/lib'
+import { cn } from '@/lib/utils'
+import { useQuestionStore } from '@/store'
 
-interface IAddQuestionDialogProps {
-  submitHandler: (values: TQuestionFormSchema) => Promise<void>,
- 
-}
-export default function AddQuestionDialog({ submitHandler }: IAddQuestionDialogProps) {
+export default function AddQuestionDialog() {
+    const { createQuestions } = useQuestionStore();
     const [open, setOpen] = useState(false);
     
     const submitQuestionHandler = async (values: TQuestionFormSchema) => {
-        await submitHandler(values);
+        await createQuestions(values);
         setOpen(false);
     };
 

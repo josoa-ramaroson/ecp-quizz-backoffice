@@ -9,10 +9,10 @@ import {
 import { Plus } from "lucide-react"
 import MemberForm from "./member-form"
 import { BUTTON_VARIANT_CLASSNAME } from "@/constants"
-import { cn } from "@/lib"
+import { cn } from "@/lib/utils"
 import { useState } from "react"
 import {  addFormSchema, IAddMemberFormSchema, IMemberFormSchema } from "../constants"
-import { EMemberRole } from "@/enums"
+import { EMemberRole, EToastMessage } from "@/enums"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, UseFormReturn } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -41,7 +41,7 @@ export default function AddMemberDialog({submitHandler}: IAddMemberDialog) {
       try {
           await submitHandler(values);
           setOpen(false);
-          toast.success("Member added successfully!");
+          toast.success(EToastMessage.MEMBER_ADDED);
           reactHookForm.reset({
               firstName: "",
               facebookName: "",
@@ -53,7 +53,7 @@ export default function AddMemberDialog({submitHandler}: IAddMemberDialog) {
       } catch (error) {
           console.error("Error submitting form:", error);
 
-          toast.error("Failed to create question. Please try again."); 
+          toast.error(EToastMessage.FAILED_TO_CREATE_MEMBER); 
       } finally {
           setIsSubmitting(false);
       }

@@ -2,19 +2,14 @@ import { Card } from '@/components/ui'
 import { Badge } from 'lucide-react'
 import React from 'react'
 interface ITopMemberItem {
-    id: number
     name: string
     score: number
     rank: number
-    avatar: string
-    initials: string
 }
 export default function TopMemberItem({
-    id,
+    
     name,
     score,
-    avatar,
-    initials,
     rank
 }: ITopMemberItem) 
  {

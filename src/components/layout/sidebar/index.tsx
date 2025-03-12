@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "@/lib"
+import { cn } from "@/lib/utils"
 import { HeaderLogo } from "./header-logo";
 import { Navbar } from "./navbar";
 import LogoutButton from "./logout-button";

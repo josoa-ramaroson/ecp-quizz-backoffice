@@ -7,4 +7,5 @@ export interface IMember {
     facebookName: string
     role: EMemberRole
     totalScore: number
+    rank?: number
   }

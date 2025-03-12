@@ -1,9 +1,10 @@
 export interface IQuiz {
     _id: string
     title: string
-    description: string
+    description?: string | undefined
     startDate: Date
     deadline: Date
-    questions: string[]
+    questionsIds: string[]
     creationDate: Date
+    isPublished: boolean
   }

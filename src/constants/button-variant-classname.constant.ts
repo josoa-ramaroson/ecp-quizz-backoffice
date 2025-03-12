@@ -3,7 +3,7 @@ import { TButtonVariantStyle } from "@/types";
 
 export const BUTTON_VARIANT_CLASSNAME: TButtonVariantStyle  = {
     [EButtonVariant.PRIMARY]: {
-        enabled: "bg-primary-600 text-white hover:bg-primary-700 shadow-md",
+        enabled: "bg-primary-600 text-white hover:bg-primary-800 shadow-md",
         disabled: "bg-primary-300 text-white cursor-not-allowed shadow-md",
       },
       [EButtonVariant.SECONDARY]: {

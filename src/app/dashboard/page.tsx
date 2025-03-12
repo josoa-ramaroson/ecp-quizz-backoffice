@@ -1,7 +1,8 @@
 "use client"
 import { DashboardLayout, OverviewPage } from '@/components'
-import { authHoc } from '@/lib'
+import authHoc from '@/lib/hoc/auth-hoc'
 import React from 'react'
+
 
 function Page() {
   return (
@@ -10,5 +11,5 @@ function Page() {
     </DashboardLayout>
   )
 }
-// export default authHoc(Page);
-export default Page;
+export default authHoc(Page);
+// export default Page;

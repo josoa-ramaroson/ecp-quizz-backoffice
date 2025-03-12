@@ -31,6 +31,7 @@ import {
 import ConfirmDeleteDialog from './confirm-delete-dialog'
 import EditMemberDialog from './edit-member-dialog'
 import { IAddMemberFormSchema, IModifyMemberFormSchema } from '../constants'
+import Link from 'next/link'
 
 interface TMembersSectionProps {
     members: IMember[],
@@ -52,6 +53,12 @@ export default function MembersSection({
     const [selectedMember, setSelectedMember] = useState<IMember>();
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isModifyDialogOpen, setIsModifyDialogOpen] = useState(false);
+
+
+    const [pagination, setPagination] = useState({
+      pageIndex: 0,
+      pageSize: 10, // Show 10 items per page
+    })
 
     const showDeletePopup = (member: IMember) =>{
       setSelectedMember(member);
@@ -142,7 +149,7 @@ export default function MembersSection({
                   <DropdownMenuContent align="end" className="bg-white border shadow-md  rounded-md ">
                     <DropdownMenuLabel className="text-md font-bold px-4 py-2 ">Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator className="h-2" />
-                    <DropdownMenuItem className="px-4 py-2 cursor-pointer hover:bg-primary-200 active:bg-primary-600" >View Profile</DropdownMenuItem>
+                    <DropdownMenuItem className="px-4 py-2 cursor-pointer hover:bg-primary-200 active:bg-primary-600" ><Link href={`/dashboard/members/${member._id}`}>View Profile</Link> </DropdownMenuItem>
                     <DropdownMenuItem 
                       onClick={() => showEditDalog(member)}
                       className="px-4 py-2 cursor-pointer hover:bg-primary-200 active:bg-primary-600" 
@@ -170,20 +177,42 @@ export default function MembersSection({
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
+        onPaginationChange: setPagination,
+        initialState: {
+          pagination: {
+            pageSize: 10,
+          },
+        },
         state: {
           sorting,
           columnFilters,
           columnVisibility,
           rowSelection,
+          pagination, // Add this line
         },
       })
     return (
         <div className="space-y-4">
+          <div className='flex items-center justify-between'>
             <SearchInput 
                 value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
                 onChange={(event) => table.getColumn("firstName")?.setFilterValue(event.target.value)}
                 placeholder="Filter by name or email..."
             />
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={e => {
+                table.setPageSize(Number(e.target.value))
+              }}
+              className="border rounded px-4 py-2"
+            >
+              {[5, 10, 20, 30, 50].map(pageSize => (
+                <option key={pageSize} value={pageSize} className='cursor-pointer'>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
             <MembersTable table={table} memberColumn={memberColumn} />
             <NextPrevButton table={table} />
             {(isDeleteDialogOpen && selectedMember) && (

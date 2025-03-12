@@ -7,6 +7,7 @@ import {
   ClipboardList, 
   BarChart3, 
   Settings,
+  BarChart,
  } from "lucide-react";
 import { useState } from "react";
 import { SidebarItem } from "./sidebar-item";
@@ -47,12 +48,11 @@ const Navbar = ({ isOpen, pathname }: { isOpen: boolean, pathname: string }) => 
             isActive={pathname.startsWith("/dashboard/quizzes")}
             isCollapsed={!isOpen}
           />
-        
           <SidebarItem
-            icon={BarChart3}
-            label="Reports & Analytics"
-            href="/dashboard/reports"
-            isActive={pathname.startsWith("/dashboard/reports")}
+            icon={BarChart}
+            label="Leaderboard"
+            href="/dashboard/leaderboard"
+            isActive={pathname.startsWith("/dashboard/leaderboard")}
             isCollapsed={!isOpen}
           />
           <SidebarItem

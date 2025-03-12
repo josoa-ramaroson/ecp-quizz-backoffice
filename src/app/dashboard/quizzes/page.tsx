@@ -1,6 +1,7 @@
 "use client"
 import { DashboardLayout, QuizzesPage } from '@/components'
-import { authHoc } from '@/lib'
+import authHoc from '@/lib/hoc/auth-hoc';
+
 
 function Page() {
   return (
@@ -10,5 +11,4 @@ function Page() {
   )
 }
 
-
-export default Page;
+export default authHoc(Page);

@@ -1,83 +1,125 @@
-import { Button, Card, Heading } from '@/components/ui'
+"use client"
+
+import { useState } from 'react'
+import { 
+  Bar, 
+  BarChart, 
+  CartesianGrid, 
+  Legend, 
+  ResponsiveContainer, 
+  Tooltip, 
+  XAxis, 
+  YAxis 
+} from 'recharts'
+
+// UI components
+import { Button, Heading } from '@/components/ui'
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardHeader, 
+  CardTitle 
+} from '@/components/ui/card'
+
+// Enums
 import { EButtonSize, EButtonVariant, EHeading } from '@/enums'
-import React, { useEffect, useState } from 'react'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+
+// Hooks
+import { useWeeklyCompletionData } from '@/hooks/use-weekly-completion-data.hook'
+import { useMonthlyCompletionData } from '@/hooks/use-monthly-completion-data.hook'
 
 type TimeRange = "weekly" | "monthly"
 
-
-// Mock data
-const weeklyData = [
-  { name: "Mon", quizzes: 4, completions: 3 },
-  { name: "Tue", quizzes: 3, completions: 2 },
-  { name: "Wed", quizzes: 5, completions: 4 },
-  { name: "Thu", quizzes: 6, completions: 4 },
-  { name: "Fri", quizzes: 8, completions: 6 },
-  { name: "Sat", quizzes: 10, completions: 8 },
-  { name: "Sun", quizzes: 7, completions: 5 },
-]
-
-const monthlyData = [
-  { name: "Week 1", quizzes: 24, completions: 18 },
-  { name: "Week 2", quizzes: 28, completions: 22 },
-  { name: "Week 3", quizzes: 32, completions: 25 },
-  { name: "Week 4", quizzes: 38, completions: 30 },
-]
-
 export default function RecentActivities() {
+  // State
   const [timeRange, setTimeRange] = useState<TimeRange>("weekly")
-  const data = timeRange === "weekly" ? weeklyData : monthlyData
-
+  
+  // Data hooks
+  const { 
+    isLoading: weeklyLoading, 
+    weeklyCompletions, 
+    error: weeklyError
+  } = useWeeklyCompletionData()
+  
+  const {
+    isLoading: monthlyLoading,
+    monthlyCompletions,
+    error: monthlyError
+  } = useMonthlyCompletionData()
+  
+  // Active data based on selected time range
+  const data = timeRange === "weekly" ? weeklyCompletions : monthlyCompletions
+  const isLoading = timeRange === "weekly" ? weeklyLoading : monthlyLoading
+  const hasError = weeklyError || monthlyError
+  
   return (
-    <div className="col-span-2 ">
-       <Card
-            header={<Heading as={EHeading.HEADING_5} className='font-extrabold'>Quiz Activities </Heading>}
-            className="h-full rounded-lg border bg-card text-card-foreground shadow-sm" 
-            descriptions={
-              <>
-                <p>Overview of quiz participation and completion rates</p>
-                <div className="flex gap-2">
-                  <Button
-                    variant={timeRange === "weekly" ? EButtonVariant.PRIMARY : EButtonVariant.OUTLINE}
-                    size={EButtonSize.MEDIUM}
-                    onClick={() => setTimeRange("weekly")}
-                    label="Weekly"
-                    />
-                  
-                  <Button
-                    variant={timeRange === "monthly" ? EButtonVariant.PRIMARY : EButtonVariant.OUTLINE}
-                    size={EButtonSize.MEDIUM}
-                    onClick={() => setTimeRange("monthly")}
-                    label='Monthly'
-                    />
-                </div>
-              </>
-            }
-            descriptionClassName='text-sm text-muted-foreground flex items-center justify-between'
-        >
+    <div className="col-span-2">
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <Heading as={EHeading.HEADING_5} className='font-extrabold'>
+              Quiz Activities
+            </Heading>  
+          </CardTitle>
           
+          <CardDescription className='w-full flex items-center justify-between'>
+            <p>Overview of quiz participation and completion rates</p>
+            <div className="flex gap-2">
+              <Button
+                variant={timeRange === "weekly" ? EButtonVariant.PRIMARY : EButtonVariant.OUTLINE}
+                size={EButtonSize.MEDIUM}
+                onClick={() => setTimeRange("weekly")}
+                label="Weekly"
+              />
+              
+              <Button
+                variant={timeRange === "monthly" ? EButtonVariant.PRIMARY : EButtonVariant.OUTLINE}
+                size={EButtonSize.MEDIUM}
+                onClick={() => setTimeRange("monthly")}
+                label='Monthly'
+              />
+            </div>
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent>
           <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={data}
-                margin={{
-                  top: 20,
-                  right: 30,
-                  left: 0,
-                  bottom: 5,
-                }}
-              >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="quizzes" name="Quizzes Taken" fill="#0ea5e9" />
-              <Bar dataKey="completions" name="Completions" fill="#10b981" />
-              </BarChart>
-            </ResponsiveContainer>
+            {isLoading ? (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-muted-foreground">Loading data...</p>
+              </div>
+            ) : hasError ? (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-destructive">Failed to load chart data</p>
+              </div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={data? data : undefined}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 0,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar 
+                    dataKey="completions" 
+                    name="Quizzes Completions" 
+                    fill="#075985" 
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </div>
-        </Card>
+        </CardContent>
+      </Card>
     </div>
   )
 }

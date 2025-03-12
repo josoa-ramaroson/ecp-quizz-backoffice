@@ -23,7 +23,7 @@ import {
     SelectValue,
  } from '@/components/ui/select'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
-import { cn } from '@/lib'
+import { cn } from '@/lib/utils'
 
 interface IAddMemberForm {
     reactHookForm: UseFormReturn<IMemberFormSchema, any, undefined>,

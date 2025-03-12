@@ -9,6 +9,7 @@ const answerSchema = z.object({
 
 const baseQuestionSchema = z
     .object({
+        _id: z.string().optional(),
         title: z.string().min(2).max(255),
         description: z.string().min(0).max(255),
         type: z.nativeEnum(EQuestionType),

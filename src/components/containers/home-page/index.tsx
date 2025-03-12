@@ -29,7 +29,7 @@ export default function HomePage() {
           className="text-secondary-900">
           Welcome to{' '}
           <span className="text-primary-600 relative inline-block">
-            ECP Daily Quiz
+            ECP Quiz Backoffice
             <div className="absolute -bottom-2 left-0 w-full h-1 bg-primary-200 rounded-full"></div>
           </span>
         </Heading> 
@@ -37,11 +37,11 @@ export default function HomePage() {
         <Heading
           as={EHeading.HEADING_6}
           >
-          Take daily English quizzes and compete for bi-weekly prizes!
+          Create, manage and analyze quizzes in one centralized dashboard
         </Heading>
 
         <Button 
-          label="Start Quiz" 
+          label="Go to Dashboard" 
           icon={<ArrowRight />} 
           className="rounded-xl"
           size={EButtonSize.LARGE}
@@ -54,7 +54,7 @@ export default function HomePage() {
       <FeaturesGrid />
     </div>
  
-    <Footer text='Ready to improve your English? Join our daily quiz challenge!' />
+    <Footer text='Streamline quiz administration and get valuable insights into participant performance' />
   </div>
   )
 }

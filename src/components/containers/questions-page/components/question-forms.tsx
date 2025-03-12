@@ -21,7 +21,7 @@ import {
     SelectValue,
  } from '@/components/ui/select'
 import { TQuestionFormSchema, questionFormSchema } from '../constants'
-import { cn } from '@/lib'
+import { cn } from '@/lib/utils'
 import { v4 as uuidv4 } from "uuid";
 import AddAnswersOptionsSections from './add-answers-options-section'
 import toast from 'react-hot-toast'
@@ -29,19 +29,6 @@ import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
 import { IQuestion } from '@/interfaces'
 
-const DEFAULT_ANSWERS = [
-    { id: uuidv4(), text: "", isCorrect: false },
-    { id: uuidv4(), text: "", isCorrect: false },
-  ];
-  
-const DEFAULT_VALUES = {
-title: "",
-description: "",
-type: EQuestionType.MULTIPLE_CHOICE,
-score: 0,
-comment: "",
-answersOptions: DEFAULT_ANSWERS,
-};
 
 interface IAddQuestionFormProps {
     submitHandler: (values: TQuestionFormSchema) => Promise<void>;
@@ -58,6 +45,7 @@ export default function QuestionForm({
     const reactHookForm  = useForm<TQuestionFormSchema>({
         resolver: zodResolver(questionFormSchema),
         defaultValues: {
+            _id: question ? question._id : "",
             title: question ? question.title : "",
             description: question ? question.description : "",
             type: question? question.type : EQuestionType.MULTIPLE_CHOICE,
@@ -184,7 +172,7 @@ export default function QuestionForm({
     };
     return (
         <Form {...reactHookForm}>
-            <form onSubmit={reactHookForm.handleSubmit(onSubmit, (error) => console.log(error))}>
+            <form onSubmit={reactHookForm.handleSubmit(onSubmit)}>
                 <FormField
                     control={reactHookForm.control}
                     name='title'
