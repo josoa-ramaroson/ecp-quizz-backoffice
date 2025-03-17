@@ -13,7 +13,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import Heading from "@/components/ui/heading"
 import { EHeading } from "@/enums"
 
-// Mock Heading component since we don't have access to the original
 
 
 export default function MemberProfilePage() {
