@@ -4,7 +4,7 @@ import { ModeratorLeaderBoardPage } from '@/components/containers/leaderboard-pa
 import authHoc from '@/lib/hoc/auth-hoc';
 import React from 'react'
 
-function page() {
+function ModeratorLeaderboard() {
   return (
     <DashboardLayout>
       <ModeratorLeaderBoardPage />
@@ -12,5 +12,5 @@ function page() {
   )
 }
 
-export default authHoc(page);
+export default authHoc(ModeratorLeaderboard);
 

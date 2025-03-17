@@ -5,7 +5,7 @@ import { MemberLeaderboardPage } from '@/components/containers/leaderboard-page'
 import authHoc from '@/lib/hoc/auth-hoc'
 import React from 'react'
 
-function page() {
+function LeaderboardMembersPage() {
   return (
     <DashboardLayout> 
         <MemberLeaderboardPage />
@@ -13,4 +13,4 @@ function page() {
   )
 }
 
-export default authHoc(page);
+export default authHoc(LeaderboardMembersPage);
