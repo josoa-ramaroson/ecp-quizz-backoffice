@@ -13,7 +13,7 @@ export function decodeJwt(jwtToken: string): TDecodeJwtReturn | null{
             return decoded;
         }
         return null;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

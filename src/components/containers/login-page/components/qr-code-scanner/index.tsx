@@ -32,7 +32,7 @@ export default function QrCodeScanner<T>({
         try {
           lastScanTime.current = now;
           dataparsed = convertDecodedDataToObject(decodedText);
-          onDataConverted && await onDataConverted(dataparsed);
+          if(onDataConverted)  await onDataConverted(dataparsed);
         } catch (error) {
           console.error(error)
           toast.error(EToastMessage.QR_CODE_INVALID);

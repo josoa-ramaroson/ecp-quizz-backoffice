@@ -7,4 +7,5 @@ export type TQuizFormValues = {
     description?: string | undefined;
     _id?: string | undefined;
     creationDate?: Date | undefined;
+    isDaily: boolean;
 }

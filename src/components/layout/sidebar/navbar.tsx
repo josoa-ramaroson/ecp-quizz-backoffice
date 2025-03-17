@@ -5,18 +5,18 @@ import {
   Users, 
   FileQuestion, 
   ClipboardList, 
-  BarChart3, 
   Settings,
   BarChart,
+  User,
+  ShieldUser,
  } from "lucide-react";
-import { useState } from "react";
 import { SidebarItem } from "./sidebar-item";
-import Link from "next/link";
+import { useState } from "react";
 
 export 
 const Navbar = ({ isOpen, pathname }: { isOpen: boolean, pathname: string }) => {
 
-
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);  
     return (
         <nav className="flex-1 overflow-y-auto p-2">
         <ul className="space-y-1">
@@ -52,9 +52,33 @@ const Navbar = ({ isOpen, pathname }: { isOpen: boolean, pathname: string }) => 
             icon={BarChart}
             label="Leaderboard"
             href="/dashboard/leaderboard"
-            isActive={pathname.startsWith("/dashboard/leaderboard")}
             isCollapsed={!isOpen}
+            hasSubmenu={true}
+            isSubmenuOpen={isLeaderboardOpen}
+            toggleSubmenu={() => setIsLeaderboardOpen((prev) => !prev)}
           />
+              {
+                  (pathname.startsWith("/dashboard/leaderboard") || isLeaderboardOpen) && (
+                  <div className="space-y-1 pl-3">
+                    <SidebarItem
+                      icon={User}
+                      label="Members"
+                      href="/dashboard/leaderboard/members"
+                      isActive={pathname.startsWith("/dashboard/leaderboard/member")}
+                      isCollapsed={!isOpen}
+                    />
+                    <SidebarItem
+                      icon={ShieldUser}
+                      label="Moderators"
+                      href="/dashboard/leaderboard/moderators"
+                      isActive={pathname.startsWith("/dashboard/leaderboard/moderator")}
+                      isCollapsed={!isOpen}
+                    />
+                  </div>
+
+                )
+              }
+          
           <SidebarItem
             icon={Settings}
             label="Settings"

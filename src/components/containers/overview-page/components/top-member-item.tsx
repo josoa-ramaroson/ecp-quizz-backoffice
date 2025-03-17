@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui'
+
 import { Badge } from 'lucide-react'
 import React from 'react'
 interface ITopMemberItem {

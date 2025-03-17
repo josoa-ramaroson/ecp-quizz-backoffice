@@ -1,9 +1,7 @@
 "use client"
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
-import { cn } from '@/lib/utils'
-import { Cross, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+
+
 import QuestionForm from './question-forms'
 import { TQuestionFormSchema } from '../constants'
 import { IQuestion } from '@/interfaces'

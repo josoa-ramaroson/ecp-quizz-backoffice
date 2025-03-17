@@ -35,7 +35,8 @@ export const SidebarItem = ({
             )}
           >
             <Icon className="h-5 w-5" />
-            {!isCollapsed && (
+            {!
+              isCollapsed && (
               <>
                 <span className="flex-1 text-left">{label}</span>
                 {isSubmenuOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}

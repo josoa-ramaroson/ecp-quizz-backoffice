@@ -33,6 +33,7 @@ export class MembersService extends BaseService {
 
     // Optional: Add statistics method if needed like other services
     static async getMemberStats(id: string) {
+        console.info(id);
         return Promise.resolve({
             quizzesCompleted: Math.floor(Math.random() * 25),
             averageScore: Math.floor(Math.random() * 100),

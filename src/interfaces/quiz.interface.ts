@@ -7,4 +7,5 @@ export interface IQuiz {
     questionsIds: string[]
     creationDate: Date
     isPublished: boolean
+    isDaily: boolean
   }

@@ -53,6 +53,7 @@ export function QuizFormDialog({
       deadline: defaultDeadline, // 1 days from now
       questionsIds: [],
       isPublished: false,
+      isDaily: false
     },
   })
 
@@ -66,6 +67,7 @@ export function QuizFormDialog({
         deadline:  new Date(quiz.deadline),
         questionsIds: quiz.questionsIds,
         isPublished: quiz.isPublished,
+        isDaily: quiz.isDaily,
       })
     } else {
      
@@ -77,6 +79,7 @@ export function QuizFormDialog({
         deadline: defaultDeadline,
         questionsIds: [],
         isPublished: false,
+        isDaily: false
       })
     }
   }, [quiz, form])
@@ -228,6 +231,21 @@ export function QuizFormDialog({
               )}
             />
 
+          <FormField
+              control={form.control}
+              name="isDaily"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">Daily Quiz</FormLabel>
+                    <p className="text-sm text-muted-foreground">Make this quiz available to be a daily quiz</p>
+                  </div>
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
                 Cancel

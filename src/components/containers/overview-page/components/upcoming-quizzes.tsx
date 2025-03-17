@@ -5,7 +5,6 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 import { EHeading } from '@/enums'
 import { useUpcommingQuizzes } from '@/hooks';
-import { IQuiz } from '@/interfaces';
 import { formatDate } from '@/lib/utils';
 import { Calendar, Plus } from 'lucide-react';
 import Link from 'next/link';
@@ -26,7 +25,7 @@ export default function UpcomingQuizzes() {
           <CardDescription>Scheduled quizzes for the next few days.</CardDescription>
         </div>
         <Button variant="default" size="sm" asChild>
-            <Link href="/quizzes">
+            <Link href="/dashboard/quizzes">
               <Plus className="mr-2 h-4 w-4" />
               New Quiz
             </Link>

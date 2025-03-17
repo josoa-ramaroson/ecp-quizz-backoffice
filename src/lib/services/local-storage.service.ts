@@ -6,7 +6,7 @@ export class LocalStorageService {
         try {
             localStorage
                 .setItem(key, JSON.stringify(value));
-        } catch (e) {
+        } catch {
             throw new Error(EErrorMessage.SET_ITEM_LOCAL_STORAGE_ERROR);
         }
     }
@@ -15,7 +15,7 @@ export class LocalStorageService {
         try {
             const item = localStorage.getItem(key);
             return item ? JSON.parse(item) : null;
-        } catch (error) {
+        } catch  {
             return null;
         }
     }
@@ -23,7 +23,7 @@ export class LocalStorageService {
     static removeItem(key: ELocalStorageKey) {
         try {
             localStorage.removeItem(key);
-        } catch (error) {
+        } catch {
             return null;
         }
     }
@@ -31,7 +31,7 @@ export class LocalStorageService {
     static clear() {
         try {
             localStorage.clear();
-        } catch (error) {
+        } catch {
             return null;
         }
     }

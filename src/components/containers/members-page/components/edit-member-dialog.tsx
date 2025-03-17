@@ -3,13 +3,9 @@ import {
   Dialog,  
   DialogContent, 
   DialogTitle, 
-  DialogTrigger,  
   DialogHeader 
 } from "@/components/ui/dialog"
-import { Plus } from "lucide-react"
 import MemberForm from "./member-form"
-import { BUTTON_VARIANT_CLASSNAME } from "@/constants"
-import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { modifyFormSchema, IModifyMemberFormSchema } from "../constants"
 import { EMemberRole, EToastMessage } from "@/enums"
@@ -37,9 +33,10 @@ export default function EditMemberDialog({
     defaultValues: {
         firstName:  member.firstName,
         facebookName:  member.facebookName,
-        email: member.email,
+        pseudo: member.pseudo,
         newPassword: "",
         role: member.role,
+        isActiveAccount: member.isActiveAccount
     },
 });
 
@@ -53,10 +50,11 @@ export default function EditMemberDialog({
           reactHookForm.reset({
               firstName: "",
               facebookName: "",
-              email: "",
+              pseudo: "",
               newPassword: "",
               confirmPassword: "",
               role: EMemberRole.MEMBER,
+              isActiveAccount: false,
           });
       } catch (error) {
           console.error("Error submitting form:", error);

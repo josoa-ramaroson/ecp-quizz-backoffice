@@ -4,7 +4,7 @@ import { AuthServices, MembersService } from "@/lib/services";
 import { decodeJwt } from "@/lib/utils";
 import { useAccessToken, useMemberStore } from "@/store";
 import { TLoginFormData } from "@/types";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback,  useState } from "react";
 import toast from "react-hot-toast";
 
 export function useAuth() {

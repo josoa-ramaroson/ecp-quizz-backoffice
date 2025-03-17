@@ -10,7 +10,7 @@ export class AuthServices  {
         try {
             const api = getClientApi();
             const response = await api.post(
-                "auth/login",
+                "auth/moderator/sign-in",
                 loginData
             );
             const accessToken =  response.data.accessToken;

@@ -1,8 +1,6 @@
 "use client"
-import { Button, Heading } from '@/components'
+import {  Heading } from '@/components'
 import { 
-    EButtonSize,
-    EButtonVariant,
     EHeading,
  } from '@/enums'
 import { ImportIcon, } from 'lucide-react'
@@ -13,6 +11,7 @@ import { IMember } from '@/interfaces'
 import { TAddMemberFormData, TModifyMemberFormData } from '@/types'
 import { handleApiExceptions } from '@/lib/utils'
 import { MembersService } from '@/lib/services'
+import { Button } from '@/components/ui/button'
 
 export default function MembersPage() {
     const [members, setMembers] = useState<IMember[]>([]);
@@ -30,7 +29,7 @@ export default function MembersPage() {
         const member: TAddMemberFormData = {
           firstName: values.firstName,
           facebookName: values.facebookName,
-          email: values.email,
+          pseudo: values.pseudo,
           password: values.newPassword ? values.newPassword : "123456789",
           role: values.role,
         };
@@ -45,7 +44,7 @@ export default function MembersPage() {
             _id: id,
             firstName: values.firstName,
             facebookName: values.facebookName,
-            email: values.email,
+            pseudo: values.pseudo,
             password: (values.newPassword?.trim().length == 0) ? values.newPassword : undefined,
             role: values.role,
           };
@@ -70,13 +69,18 @@ export default function MembersPage() {
                 </Heading>
                 <div className="flex gap-2">
                     <AddMemberDialog  submitHandler={handleAddMember}/>
-                    <Button
+                    {/* <Button
                         variant={EButtonVariant.SECONDARY}
                         size={EButtonSize.MEDIUM}
-                        label='Import'
+                        label='Import '
                         icon={<ImportIcon  /> }
                         className='bg-secondary-600'
-                    />
+                    /> */}
+                    <Button  variant="secondary">
+                        <ImportIcon />
+                        <span>Import from csv</span>
+                    </Button>
+
                 </div>
             </div>
             <MembersSection 

@@ -4,16 +4,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccessToken } from "@/store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-
-const authHoc = <P extends object>(Component: React.ComponentType<P> ) => {
-  return (props: P) => {
+const authHoc = <P extends object>(Component: React.ComponentType<P>) => {
+  const WrappedComponent = (props: P) => {
     const router = useRouter();
-    const { accessToken, verifyAccessToken } = useAccessToken(); 
+    const { accessToken, verifyAccessToken } = useAccessToken();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);  // Add loading state
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      // Check authentication only on client-side
       const checkAuth = async () => {
         if (!verifyAccessToken()) {
           router.replace("/login");
@@ -22,16 +20,20 @@ const authHoc = <P extends object>(Component: React.ComponentType<P> ) => {
         }
         setIsLoading(false);
       };
-      
-      checkAuth();
-    }, [accessToken, router]);
 
-    // Show consistent loading state during authentication check
+      checkAuth();
+    }, [accessToken, router, verifyAccessToken]); // ✅ Include verifyAccessToken
+
     if (isLoading) {
       return <LoadingSpinner />;
     }
+    
     return isAuthenticated ? <Component {...props} /> : null;
   };
+
+  WrappedComponent.displayName = `AuthHOC(${Component.displayName || Component.name || "Component"})`; // ✅ Fix display name
+
+  return WrappedComponent;
 };
 
 export default authHoc;

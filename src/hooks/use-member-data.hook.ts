@@ -2,7 +2,7 @@
 import { EErrorMessage } from "@/enums";
 import { IMember } from "@/interfaces";
 import { MembersService } from "@/lib/services";
-import { useAccessToken, useMemberStore } from "@/store";
+import { useAccessToken } from "@/store";
 import { useCallback, useEffect, useState } from "react";
 
 export function useMemberInfo(memberId: string) {

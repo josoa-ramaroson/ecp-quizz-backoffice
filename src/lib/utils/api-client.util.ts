@@ -33,7 +33,7 @@ export function getClientApi(accessToken?: string | null) {
           throw new Error(EErrorMessage.NO_RESPONSE_FROM_SERVER_ERROR);
         
         const { data } = error.response;
-        let errorMessage = data?.message  || EErrorMessage.UNKNOWN_ERROR;
+        const errorMessage = data?.message  || EErrorMessage.UNKNOWN_ERROR;
     
         throw new Error(errorMessage);
         }  

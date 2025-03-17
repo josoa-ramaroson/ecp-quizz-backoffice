@@ -1,4 +1,3 @@
-import { IQuestion } from "@/interfaces";
 import { TQuestionFormData } from "@/types";
 import { BaseService } from "./base.service";
 
@@ -25,11 +24,5 @@ export class QuestionsService extends BaseService {
         return this.makeRequests(`/questions/${id}`, "DELETE");
     }
     
-    // Optional: Add statistics method if needed
-    static async getQuestionStats(id: string) {
-        return Promise.resolve({
-            timesAnswered: Math.floor(Math.random() * 500),
-            correctPercentage: Math.floor(Math.random() * 100),
-        });
-    }
+    
 }

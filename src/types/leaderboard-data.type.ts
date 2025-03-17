@@ -1,6 +1,6 @@
 export type TLeaderboardData = {
     memberId: string;
-    firstName: string;
+    pseudo: string;
     score: number;
     rank: number;
 }

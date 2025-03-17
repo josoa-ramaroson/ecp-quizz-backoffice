@@ -1,6 +1,6 @@
 "use client"
 import { IQuestionStore } from "@/interfaces";
-import { QuestionsService } from "@/lib/services";
+import { QuestionsService, QuizzesService } from "@/lib/services";
 import { TQuestionFormData } from "@/types";
 import { create } from "zustand";
 
@@ -46,6 +46,7 @@ export const useQuestionStore = create<IQuestionStore>((set, get) => ({
     },
     deleteQuestions: async (id) => {
         try {
+            await QuizzesService.removeQuestionFromAllQuizzes(id);
             await QuestionsService.delete(id);
             set({ questions: get().questions.filter((q) => q._id !== id) });
             return true;

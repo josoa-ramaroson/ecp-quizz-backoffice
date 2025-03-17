@@ -1,11 +1,9 @@
 import type { LucideIcon } from "lucide-react"
-import { ArrowUpIcon, ArrowDownIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface MetricCardProps {
   title: string
   value: number
-  trend?: "up" | "down" | "neutral"
   icon: LucideIcon
   color?: "primary" | "secondary" | "accent" | "success" | "warning" | "error"
 }
@@ -13,7 +11,6 @@ interface MetricCardProps {
 export function MetricCard({
   title,
   value,
-  trend = "neutral",
   icon: Icon,
   color = "primary",
 }: MetricCardProps) {

@@ -2,10 +2,10 @@
 
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, AtSign, Facebook, Trophy, Medal, Calendar, Clock } from "lucide-react"
+import { ArrowLeft, AtSign, Facebook, Trophy, Medal,  } from "lucide-react"
 
 import { useMemberInfo } from "@/hooks/use-member-data.hook"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -68,7 +68,7 @@ export default function MemberProfilePage() {
                     </div>
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <AtSign className="w-4 h-4" />
-                      <span>{memberInfo?.email}</span>
+                      <span>{memberInfo?.pseudo}</span>
                     </div>
                   </div>
                 </div>
@@ -95,7 +95,12 @@ export default function MemberProfilePage() {
               </div>
             </CardHeader>
           </Card>
-
+          <Card>
+            <CardHeader>
+              <CardTitle>Quizzes History</CardTitle>
+              <CardDescription>Follow every activities of the current member</CardDescription>
+            </CardHeader>
+          </Card>
           {/* Quizzes Section */}
           {/* <Card>
             <CardHeader>
@@ -143,13 +148,6 @@ export default function MemberProfilePage() {
   )
 }
 
-// Helper function to determine badge variant based on score
-function getScoreBadgeVariant(score: number) {
-  if (score >= 90) return "success"
-  if (score >= 70) return "default"
-  if (score >= 50) return "secondary"
-  return "destructive"
-}
 
 // Loading skeleton
 function ProfileSkeleton() {

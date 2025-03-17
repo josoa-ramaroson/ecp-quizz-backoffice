@@ -8,8 +8,7 @@ import {
     FormMessage 
 } from '@/components/ui/form'
 import React, { useState } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form'
-import { zodResolver } from "@hookform/resolvers/zod"
+import { UseFormReturn } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
@@ -22,11 +21,13 @@ import {
     SelectContent, 
     SelectValue,
  } from '@/components/ui/select'
-import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2, RefreshCcw } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useGeneratePseudo } from '@/hooks'
+import { Switch } from '@/components/ui/switch'
 
 interface IAddMemberForm {
-    reactHookForm: UseFormReturn<IMemberFormSchema, any, undefined>,
+    reactHookForm: UseFormReturn<IMemberFormSchema,  undefined>,
     onSubmit: (values: IMemberFormSchema ) => Promise<void>,
     isSubmitting: boolean,
     submitLabel: string,
@@ -40,7 +41,12 @@ export default function MemberForm({
 }: IAddMemberForm) {
     
     const [showPassword, setShowPassword] = useState(false);
+    const { generatePseudo } = useGeneratePseudo();
 
+    const handleGeneratePseudo = () => {
+        const pseudo = generatePseudo()
+        reactHookForm.setValue('pseudo', pseudo);
+    }
 
     return (
             <Form {...reactHookForm}>
@@ -75,12 +81,22 @@ export default function MemberForm({
 
                     <FormField
                         control={reactHookForm.control}
-                        name='email'
+                        name='pseudo'
                         render={({ field }) => (
                             <FormItem className='mb-4'>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Pseudo</FormLabel>
                                 <FormControl>
-                                    <Input type="email"  placeholder="Member's email" {...field} />
+                                    <div className='flex items-center relative'>
+                                        <Input type="text"  placeholder="ex: SillyPoney..." {...field} />
+                                        <button
+                                            type="button"
+                                            className="absolute right-3 text-gray-500 hover:bg-secondary-100 active:bg-secondary-300 p-2 rounded-full"
+                                            title='Generate a pseudo'
+                                            onClick={handleGeneratePseudo}
+                                        >
+                                            <RefreshCcw size={18} /> 
+                                        </button>
+                                    </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -148,6 +164,21 @@ export default function MemberForm({
                         )}
                     />
 
+                <FormField
+                control={reactHookForm.control}
+                name="isActiveAccount"
+                render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                        <FormLabel className="text-base">Active account</FormLabel>
+                        <p className="text-sm text-muted-foreground">This account will be able to practice quizzes</p>
+                    </div>
+                    <FormControl>
+                        <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    </FormItem>
+                )}
+                />
                     <Button 
                         type="submit" 
                         className={cn(BUTTON_VARIANT_CLASSNAME.primary.enabled, "w-full text-center")} 

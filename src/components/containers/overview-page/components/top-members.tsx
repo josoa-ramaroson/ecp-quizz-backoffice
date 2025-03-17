@@ -4,16 +4,13 @@ import React from 'react'
 import TopMemberItem from './top-member-item';
 import { useTopPerformer } from '@/hooks';
 import { TTopPerformerData } from '@/types';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 
-const topMembers = [
-    { id: 1, rank: 1, name: "Sarah Johnson", score: 1250, avatar: "/placeholder.svg?height=40&width=40", initials: "SJ" },
-    { id: 4, rank: 2, name: "David Kim", score: 980, avatar: "/placeholder.svg?height=40&width=40", initials: "DK" },
-    { id: 5, rank: 3, name: "Olivia Martinez", score: 920, avatar: "/placeholder.svg?height=40&width=40", initials: "OM" },
-  ];
 
 export default function TopMembers() {
-  const { isLoading, error, topPerformer } = useTopPerformer()
+  const { isLoading,  error, topPerformer } = useTopPerformer()
+  if (isLoading) return <LoadingSpinner size={4} />
   return (
     <Card 
         className='rounded-lg border bg-card text-card-foreground sm:w-full'

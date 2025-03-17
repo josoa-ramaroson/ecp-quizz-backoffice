@@ -45,7 +45,8 @@ export function QuestionList({ questions, onEdit }: QuestionListProps) {
   }
 
   const handleDuplicate = async (question: IQuestion) => {
-    const { _id, creationDate, ...rest } = question
+    const { _id, creationDate, ...rest } = question;
+    console.info(_id, creationDate);
     await createQuestions({
       ...rest,
       title: `${question.title} (Copy)`,

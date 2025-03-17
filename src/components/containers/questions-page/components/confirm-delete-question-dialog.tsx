@@ -1,13 +1,22 @@
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
+import { 
+  AlertDialog, 
+  AlertDialogAction, 
+  AlertDialogContent, 
+  AlertDialogDescription, 
+  AlertDialogFooter, 
+  AlertDialogHeader, 
+  AlertDialogTitle, 
+
+ } from '@/components/ui/alert-dialog'
 import { EQuestionType } from '@/enums'
+import { handleApiExceptions } from '@/lib/utils'
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 import React from 'react'
 interface IConfirmDeleteQuestionDialog {
   title: string,
   type: EQuestionType,
   score: number,
-  onConfirm: () => void,
+  onConfirm: () => Promise<void>,
   isOpen: boolean,
   setIsOpen: (value: boolean) => void
 }
@@ -42,7 +51,7 @@ export default function ConfirmDeleteQuestionDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} className="bg-error-500 text-white">Delete</AlertDialogAction>
+          <AlertDialogAction onClick={() => handleApiExceptions(onConfirm)} className="bg-error-500 text-white">Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

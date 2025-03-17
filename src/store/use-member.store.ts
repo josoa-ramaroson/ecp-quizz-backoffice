@@ -5,7 +5,7 @@ import { LocalStorageService } from "@/lib/services";
 import { TMemberStore } from "@/types";
 import { create } from "zustand";
 
-export const useMemberStore = create<TMemberStore>((set, get) => ({
+export const useMemberStore = create<TMemberStore>((set) => ({
     member: LocalStorageService.getItem<IMember>(ELocalStorageKey.MEMBER) || null,
     
     setMember: (member: IMember | null) => {

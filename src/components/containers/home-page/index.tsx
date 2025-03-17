@@ -1,7 +1,7 @@
 "use client"
 import { Button, Footer, Heading } from '@/components'
 import { EButtonSize, EButtonVariant, EHeading } from '@/enums'
-import { ArrowRight, Calendar, Trophy, Users } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { FeaturesGrid } from './components'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'

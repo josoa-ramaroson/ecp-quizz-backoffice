@@ -1,10 +1,8 @@
 "use client"
-import { ColumnDef, ColumnFiltersState, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState } from '@tanstack/react-table'
 import React, { useMemo, useState } from 'react'
 import { IQuestion } from '@/interfaces'
 import SearchInput from '@/components/ui/search-input'
 import FilterButton from './filter-button'
-import PaginationButton from './pagination-buttons'
 
 import EditQuestionDialog from './edit-questions-dialog'
 import ConfirmDeleteQuestionDialog from './confirm-delete-question-dialog'
@@ -67,7 +65,7 @@ export default function QuestionsTableSection() {
                     title={selectedQuestion.title}
                     type={selectedQuestion.type}
                     score={selectedQuestion.score}
-                    onConfirm={() => deleteQuestions(selectedQuestion._id)}
+                    onConfirm={async() => { await deleteQuestions(selectedQuestion._id)}}
                   
                 />
             )

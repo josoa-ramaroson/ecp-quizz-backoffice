@@ -13,11 +13,11 @@ export default function LoginPage() {
   const router  = useRouter();
 
   const { login, error, isLoading, setIsLoading } = useAuth();
-  const [isQrCodeLogin, setIsQrCodeLogin] = useState(false);
+  const [isQrCodeLogin] = useState(false);
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
 
   const [loginFormData, setLoginFormData] = useState<TLoginFormData>({
-    email: '',
+    pseudo: '',
     password: ''
   });
 
@@ -27,7 +27,7 @@ export default function LoginPage() {
       setIsLoading(true);
       router.push("/dashboard");
     }
-  }, [isLoginSuccessful, isLoading, error, router]);
+  }, [isLoginSuccessful, isLoading, router]);
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,12 +41,13 @@ export default function LoginPage() {
     e.preventDefault();
  
     await login(loginFormData);
-    setIsLoginSuccessful(!!!error)
+    setIsLoginSuccessful(!!!error);
+    setIsLoading(false);
   };
 
-  const handleChangeLoginType = () => {
-    setIsQrCodeLogin(curr => !curr);
-  }
+  // const handleChangeLoginType = () => {
+  //   setIsQrCodeLogin(curr => !curr);
+  // }
 
   const handleQrCodeDataConversion = (data: string): TLoginFormData =>  {
       try {
@@ -99,14 +100,14 @@ export default function LoginPage() {
                     Back to Welcome Page
                   </Link>
                     
-                  <div className='min-w-[1px] h-8 bg-secondary-800 '></div>
+                  {/* <div className='min-w-[1px] h-8 bg-secondary-800 '></div>
                   <Link
                   href="#"
                     onClick={handleChangeLoginType}
                     className='w-full text-center text-secondary-800 hover:text-primary-700'
                   >
                     {isQrCodeLogin ? 'Log in via email': "Log in via QR Code"}
-                    </Link>
+                  </Link> */}
                 </div>
               </>
           }

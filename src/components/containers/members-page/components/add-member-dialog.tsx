@@ -29,10 +29,11 @@ export default function AddMemberDialog({submitHandler}: IAddMemberDialog) {
     defaultValues: {
         firstName:  "",
         facebookName:  "",
-        email: "",
+        pseudo: "",
         newPassword: "123456789",
         confirmPassword: "",
         role: EMemberRole.MEMBER,
+        isActiveAccount: true,
     },
 });
 
@@ -45,10 +46,11 @@ export default function AddMemberDialog({submitHandler}: IAddMemberDialog) {
           reactHookForm.reset({
               firstName: "",
               facebookName: "",
-              email: "",
+              pseudo: "",
               newPassword: "123456789",
               confirmPassword: "",
               role: EMemberRole.MEMBER,
+              isActiveAccount: true,
           });
       } catch (error) {
           console.error("Error submitting form:", error);

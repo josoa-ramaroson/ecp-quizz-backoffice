@@ -6,7 +6,7 @@ export function verifyJwtExpiry(accessToken: string): boolean {
         const decoded = jwtDecode(accessToken);
         const currentTime = Math.floor(Date.now() / 1000);
         return decoded.exp ? decoded.exp > currentTime : false;
-    } catch (error) {
+    } catch {
         return false;
     }
 }

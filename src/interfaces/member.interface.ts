@@ -2,10 +2,11 @@ import { EMemberRole } from "@/enums"
 
 export interface IMember {
     _id: string
-    email: string
+    pseudo: string
     firstName: string
     facebookName: string
     role: EMemberRole
     totalScore: number
     rank?: number
+    isActiveAccount: boolean
   }

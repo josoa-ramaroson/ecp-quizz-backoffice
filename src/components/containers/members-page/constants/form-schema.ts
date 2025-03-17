@@ -5,8 +5,9 @@ import { z } from "zod";
 const baseFormSchema = z.object({
     firstName: z.string().min(2).max(255),
     facebookName: z.string().min(2).max(255),
-    email: z.string().email(),
+    pseudo: z.string().min(4).max(255),
     role: z.nativeEnum(EMemberRole),
+    isActiveAccount: z.boolean()
 });
 
 // Add Schema (Password Required)

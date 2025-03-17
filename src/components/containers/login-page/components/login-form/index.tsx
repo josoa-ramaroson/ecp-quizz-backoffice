@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useState } from 'react'
-import { ArrowRight, Lock, User } from 'lucide-react';
+import { ArrowRight,  User } from 'lucide-react';
 import { TLoginFormData } from '@/types';
 import { Button, Input} from '@/components';
 import { EButtonSize, EButtonVariant } from '@/enums';
@@ -33,14 +33,14 @@ export default function LoginForm(
         onSubmit={handleSubmitWithState}
         className={clsx("space-y-6",className)}>
         <Input 
-          id='email'
-          value={loginFormData.email}
-          type="email"
-          label='Email'
+          id='pseudo'
+          value={loginFormData.pseudo}
+          type="text"
+          label='Pseudo'
           required={true}
           handleChange={handleInputChange}
           leftIcon={<User />}
-          placeHolder='Enter your Email'
+          placeHolder='ex: SillyPinguin...'
         />
 
         <PasswordInput 

@@ -2,7 +2,7 @@
 
 import { useAccessToken } from "@/store/use-access-token.store";
 
-import { getClientApi, handleApiExceptions } from "../utils";
+import { getClientApi } from "../utils";
 import { EErrorMessage } from "@/enums";
 
 export class BaseService {

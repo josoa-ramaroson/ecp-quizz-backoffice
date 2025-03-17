@@ -16,21 +16,21 @@ export default function MetricCards() {
             <MetricCard
               title="Total Members"
               value={metrics?.totalMember? metrics?.totalMember : 0}
-              trend="up"
+              
               icon={Users}
               color="primary"
             />
             <MetricCard
               title="Active Quizzes"
               value={metrics?.activeQuizzes? metrics?.activeQuizzes : 0}
-              trend="up"
+              
               icon={ClipboardList}
               color="success"
             />
             <MetricCard
               title="Completion Rate"
               value={metrics?.completionRate? metrics?.completionRate : 0}
-              trend="up"
+             
               icon={Percent}
               color="secondary"
             />

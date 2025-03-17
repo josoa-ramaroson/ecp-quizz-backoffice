@@ -9,4 +9,5 @@ export const quizFormSchema = z.object({
   creationDate: z.date().optional(),
   questionsIds: z.array(z.string()),
   isPublished: z.boolean(),
+  isDaily: z.boolean()
 });

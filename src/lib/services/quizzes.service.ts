@@ -19,11 +19,17 @@ export class QuizzesService extends BaseService {
         return this.makeRequests(`/quizzes/${quiz._id}`, "PUT", quiz);
     }
 
+
+    static async removeQuestionFromAllQuizzes(questionId: string) {
+        return this.makeRequests(`/quizzes/question/${questionId}`, "DELETE");
+    }
+
     static async delete(id:string) {
         return this.makeRequests(`/quizzes/${id}`, "DELETE");
     }
 
     static async getQuizStats(id: string) {
+        console.info(id);
         return Promise.resolve({
             participants: Math.floor(Math.random() * 100),
             completionRate: Math.floor(Math.random() * 100),

@@ -1,5 +1,12 @@
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-import { BUTTON_VARIANT_CLASSNAME } from '@/constants'
+import { 
+  AlertDialog,
+  AlertDialogAction, 
+  AlertDialogContent, 
+  AlertDialogDescription, 
+  AlertDialogFooter, 
+  AlertDialogHeader, 
+  AlertDialogTitle, 
+ } from '@/components/ui/alert-dialog'
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 import React from 'react'
 interface IConfirmDeleteDialog {

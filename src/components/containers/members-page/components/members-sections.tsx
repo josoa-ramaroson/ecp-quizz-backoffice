@@ -30,7 +30,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import ConfirmDeleteDialog from './confirm-delete-dialog'
 import EditMemberDialog from './edit-member-dialog'
-import { IAddMemberFormSchema, IModifyMemberFormSchema } from '../constants'
+import { IModifyMemberFormSchema } from '../constants'
 import Link from 'next/link'
 
 interface TMembersSectionProps {
@@ -91,14 +91,14 @@ export default function MembersSection({
             ),
           },
           {
-            accessorKey: "email",
+            accessorKey: "pseudo",
             header: ({ column }) => {
               return (
                 <Button
                   variant={EButtonVariant.GHOST}
                   size={EButtonSize.SMALL}
                   onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                  label="Email"
+                  label="Pseudo"
                   icon={<ArrowUpDown className="ml-2 h-4 w-4" />}
                   />
               )
@@ -197,7 +197,7 @@ export default function MembersSection({
             <SearchInput 
                 value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
                 onChange={(event) => table.getColumn("firstName")?.setFilterValue(event.target.value)}
-                placeholder="Filter by name or email..."
+                placeholder="Filter by name or pseudo..."
             />
             <select
               value={table.getState().pagination.pageSize}
