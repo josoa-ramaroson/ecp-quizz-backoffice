@@ -1,3 +1,5 @@
+"use client"
+
 export enum EButtonSize  {
     SMALL = "sm",
     MEDIUM = "md",

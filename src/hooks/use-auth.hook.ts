@@ -29,10 +29,11 @@ export function useAuth() {
                 setMember(member);
             }
             toast.success(EToastMessage.CONNECTED);
-
+            return true; 
         } catch (error) {
             setError(error instanceof Error ? error : new Error(EErrorMessage.UNAUTHORIZED_ERROR));
             toast.error(error instanceof Error ? error.message : EErrorMessage.UNAUTHORIZED_ERROR);
+            return false; 
         } finally { 
             setIsLoading(false);
         }

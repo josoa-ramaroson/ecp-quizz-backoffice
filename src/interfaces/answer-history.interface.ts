@@ -1,3 +1,5 @@
+"use client"
+
 import { IAnswerRecord } from "."
 
 export interface IAnswerHistory {

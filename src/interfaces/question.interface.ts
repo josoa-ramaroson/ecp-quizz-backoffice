@@ -1,3 +1,4 @@
+"use client"
 import { EQuestionType } from "@/enums"
 import { IAnswer } from "./answer.interface"
 

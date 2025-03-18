@@ -1,3 +1,5 @@
+"use client"
+
 import { TMetricsData, TQuizCompletionsData, TTopPerformerData } from "@/types";
 import { BaseService } from "./base.service";
 

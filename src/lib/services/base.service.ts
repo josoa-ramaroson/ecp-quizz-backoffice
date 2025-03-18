@@ -1,4 +1,4 @@
-
+"use client"
 
 import { useAccessToken } from "@/store/use-access-token.store";
 

@@ -1,15 +1,9 @@
 "use client"
-import dynamic from 'next/dynamic';
-// Dynamically import LoginPage with SSR disabled
-const LoginPage = dynamic(
-  () => import('@/components/containers/login-page'),
-  { ssr: false }
-)
+import LoginPage  from "@/containers/login-page";
+
 export default function LoginPageRoute() {
 
-
   return (
-    <LoginPage 
-    />
+    <LoginPage />
   )
 }

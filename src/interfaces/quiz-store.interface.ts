@@ -1,3 +1,5 @@
+"use client"
+
 import { IQuiz } from "@/interfaces"
 
 export interface IQuizStore  {

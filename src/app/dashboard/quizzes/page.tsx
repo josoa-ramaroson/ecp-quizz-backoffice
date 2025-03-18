@@ -1,17 +1,7 @@
 "use client"
+import DashboardLayout from '@/components/layout/dashboard-layout';
+import { QuizzesPage } from '@/containers';
 import authHoc from '@/lib/hoc/auth-hoc';
-import dynamic from 'next/dynamic'
- 
-const DashboardLayout = dynamic(
-  () => import('@/components/layout/dashboard-layout'),
-  { ssr: false }
-)
- 
-const QuizzesPage = dynamic(
-  () => import('@/components/containers/quizzes-page'),
-  { ssr: false }
-)
- 
 
 function QuizzesPageRoute() {
   return (

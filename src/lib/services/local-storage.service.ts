@@ -1,3 +1,4 @@
+"use client"
 
 import { EErrorMessage, ELocalStorageKey } from "@/enums";
 

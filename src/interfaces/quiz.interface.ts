@@ -1,3 +1,5 @@
+"use client"
+
 export interface IQuiz {
     _id: string
     title: string

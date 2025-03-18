@@ -1,4 +1,6 @@
-import { TQuestionFormSchema } from "@/components/containers/questions-page/constants";
+"use client"
+
+import { TQuestionFormSchema } from "@/containers/questions-page/constants";
 import { IQuestion } from "./question.interface";
 
 export interface IQuestionStore  {

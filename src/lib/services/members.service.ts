@@ -1,3 +1,5 @@
+"use client"
+
 import { IMember } from "@/interfaces";
 import { TAddMemberFormData, TModifyMemberFormData } from "@/types";
 import { BaseService } from "./base.service";

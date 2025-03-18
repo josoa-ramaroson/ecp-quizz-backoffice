@@ -1,3 +1,5 @@
+"use client"
+
 import { IQuiz } from "@/interfaces";
 import { TQuizFormValues } from "@/types";
 import { BaseService } from "./base.service";

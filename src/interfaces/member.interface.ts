@@ -1,3 +1,5 @@
+"use client"
+
 import { EMemberRole } from "@/enums"
 
 export interface IMember {

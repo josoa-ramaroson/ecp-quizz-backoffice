@@ -1,3 +1,4 @@
+"use client"
 export enum EHeading {
     HEADING_1 = "h1",
     HEADING_2 = "h2",

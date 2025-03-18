@@ -1,3 +1,5 @@
+"use client"
+
 export * from "./token-state.interface";
 export * from "./member.interface";
 export * from "./question.interface";

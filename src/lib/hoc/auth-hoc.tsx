@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccessToken } from "@/store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import dynamic from "next/dynamic";
 
 const AuthWrapper = <P extends object>(Component: React.ComponentType<P>) => {
   const WrappedComponent = (props: P) => {
@@ -39,7 +38,12 @@ const AuthWrapper = <P extends object>(Component: React.ComponentType<P>) => {
 };
 
 // Dynamically wrap the auth HOC to ensure it's client-side only
-const authHoc = <P extends object>(Component: React.ComponentType<P>) =>
-  dynamic(() => Promise.resolve(AuthWrapper(Component)), { ssr: false });
+const authHoc = <P extends object>(Component: React.ComponentType<P>) => {
+  const FinalWrapping = (props: P) => {
+    const WrappedComponent = AuthWrapper(Component);
+    return <WrappedComponent {...props} />;
+  };
+  return FinalWrapping;
+};
 
 export default authHoc;

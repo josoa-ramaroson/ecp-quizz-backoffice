@@ -1,3 +1,5 @@
+"use client"
+
 import { TQuestionFormData } from "@/types";
 import { BaseService } from "./base.service";
 

@@ -1,3 +1,5 @@
+"use client"
+
 export enum EErrorMessage {
     SET_ITEM_LOCAL_STORAGE_ERROR = "Error setting item in local storage",
     GET_ITEM_LOCAL_STORAGE_ERROR = "Error getting item from local storage",

@@ -24,10 +24,11 @@ export default function LoginPage() {
   useEffect(() => {
     // Only navigate when login is successful and not loading
     if (isLoginSuccessful && !isLoading && !error) {
+      console.log("Login successful");  
       setIsLoading(true);
       router.push("/dashboard");
     }
-  }, [isLoginSuccessful, isLoading, router]);
+  }, [isLoginSuccessful, isLoading, router, error]);
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,8 +41,8 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
  
-    await login(loginFormData);
-    setIsLoginSuccessful(!!!error);
+    const loginResult = await login(loginFormData);
+    setIsLoginSuccessful(loginResult);
     setIsLoading(false);
   };
 
