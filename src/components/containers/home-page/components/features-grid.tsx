@@ -1,3 +1,5 @@
+"use client"
+
 import { Calendar, Trophy, Users } from 'lucide-react'
 import React, { useState } from 'react'
 import FeatureCard from './feature-card'

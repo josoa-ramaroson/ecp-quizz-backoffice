@@ -1,3 +1,4 @@
+"use client"
 import { EMemberRole } from "@/enums";
 import { z } from "zod";
 

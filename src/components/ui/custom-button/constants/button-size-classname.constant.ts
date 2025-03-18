@@ -1,3 +1,5 @@
+"use client"
+
 import { EButtonSize } from "@/enums";
 
 export const BUTTON_SIZE_CLASSNAME: Record<EButtonSize, string> = {

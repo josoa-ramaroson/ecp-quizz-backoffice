@@ -1,9 +1,14 @@
 "use client"
-import { DashboardLayout } from '@/components';
 import { ModeratorLeaderBoardPage } from '@/components/containers/leaderboard-page';
-import authHoc from '@/lib/hoc/auth-hoc';
 import React from 'react'
+import dynamic from 'next/dynamic'
+import authHoc from '@/lib/hoc/auth-hoc';
 
+const DashboardLayout = dynamic(
+  () => import('@/components/layout/dashboard-layout'),
+  { ssr: false }
+)
+ 
 function ModeratorLeaderboard() {
   return (
     <DashboardLayout>

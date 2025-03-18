@@ -1,3 +1,4 @@
+"use client"
 import DashboardLayout from "./dashboard-layout";
 import Sidebar from "./sidebar";
 

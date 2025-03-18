@@ -1,3 +1,5 @@
+"use client"
+
 import { EQuestionType } from "@/enums";
 import { z } from "zod";
 

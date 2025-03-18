@@ -1,3 +1,5 @@
+"use client"
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { IQuestion } from '@/interfaces'
 import { ColumnDef, flexRender, Table as TTable } from '@tanstack/react-table'

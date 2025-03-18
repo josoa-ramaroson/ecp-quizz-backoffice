@@ -1,3 +1,4 @@
+"use client"
 
 import { ELocalStorageKey } from "@/enums";
 import { LocalStorageService } from "@/lib/services";

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components'
 import { EButtonSize, EButtonVariant } from '@/enums'
 import { cn } from '@/lib/utils'

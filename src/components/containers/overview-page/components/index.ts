@@ -1,3 +1,5 @@
+"use client"
+
 import MetricCards from "./metric-cards";
 import RecentActivities from "./recent-activities";
 import TopMembers from "./top-members";

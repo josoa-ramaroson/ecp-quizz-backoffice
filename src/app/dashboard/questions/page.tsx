@@ -1,10 +1,16 @@
 "use client"
-import { DashboardLayout, QuestionsPage } from '@/components'
+import { QuestionsPage } from '@/components';
 import authHoc from '@/lib/hoc/auth-hoc';
-
+import dynamic from 'next/dynamic'
+ 
+const DashboardLayout = dynamic(
+  () => import('@/components/layout/dashboard-layout'),
+  { ssr: false }
+)
+ 
 import React from 'react'
 
-function Page() {
+function QuestionPageRoute() {
   return (
     <DashboardLayout>
         <QuestionsPage />
@@ -12,4 +18,4 @@ function Page() {
   )
 }
 
-export default authHoc(Page);
+export default authHoc(QuestionPageRoute);

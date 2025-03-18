@@ -1,3 +1,4 @@
+"use client"
 import { Button, Heading } from '@/components/ui'
 import { EButtonSize, EButtonVariant, EHeading } from '@/enums'
 import { ImportIcon } from 'lucide-react'

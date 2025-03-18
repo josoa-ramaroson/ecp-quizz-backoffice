@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, Heading } from '@/components/ui'
 import { EHeading } from '@/enums'
 import React from 'react'

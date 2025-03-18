@@ -1,3 +1,5 @@
+"use client"
+
 import { MetricCard } from '@/components'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { useMetricsData } from '@/hooks/use-metrics-data.hook'

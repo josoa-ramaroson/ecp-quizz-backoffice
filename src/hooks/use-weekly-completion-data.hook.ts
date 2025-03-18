@@ -1,3 +1,4 @@
+"use client"
 import { EErrorMessage } from "@/enums";
 import { StatsService } from "@/lib/services/stats.service";
 import { TQuizCompletionsData } from "@/types";
@@ -24,7 +25,7 @@ export const useWeeklyCompletionData = () => {
 
     useEffect(()=>{
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     return {
         weeklyCompletions,

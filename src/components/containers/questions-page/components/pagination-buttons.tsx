@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { IQuestion } from '@/interfaces'
 import { Table } from '@tanstack/react-table'

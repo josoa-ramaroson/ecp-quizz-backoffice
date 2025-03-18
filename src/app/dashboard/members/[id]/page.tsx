@@ -1,9 +1,15 @@
 "use client"
-import { DashboardLayout, MemberProfilePage } from '@/components';
+import { MemberProfilePage } from '@/components';
 import authHoc from '@/lib/hoc/auth-hoc'
 import React from 'react'
-
-function page() {
+import dynamic from 'next/dynamic'
+ 
+const DashboardLayout = dynamic(
+  () => import('@/components/layout/dashboard-layout'),
+  { ssr: false }
+)
+ 
+function MemberIdPageRoute() {
   return (
     <DashboardLayout>
         <MemberProfilePage />
@@ -11,4 +17,4 @@ function page() {
   )
 }
 
-export default  authHoc(page);
+export default  authHoc(MemberIdPageRoute);

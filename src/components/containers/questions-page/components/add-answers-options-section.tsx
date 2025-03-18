@@ -1,3 +1,4 @@
+"use client"
 
 import { TAnswersOptionsSchema } from '../constants'
 import { EButtonSize, EButtonVariant, EQuestionType } from '@/enums';

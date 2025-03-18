@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { EQuestionType } from '@/enums'
 import React, { SetStateAction } from 'react'

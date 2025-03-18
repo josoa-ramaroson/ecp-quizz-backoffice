@@ -1,3 +1,4 @@
+"use client"
 import {  IQuizStore } from "@/interfaces";
 import { QuizzesService } from "@/lib/services";
 import { TQuizFormValues } from "@/types";

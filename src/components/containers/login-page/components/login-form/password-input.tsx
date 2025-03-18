@@ -1,3 +1,5 @@
+"use client"
+
 import { Eye, EyeOff, Lock } from "lucide-react";
 import { Input } from "@/components";
 import { useState } from "react";

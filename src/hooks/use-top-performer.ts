@@ -25,7 +25,7 @@ export const useTopPerformer = () => {
 
     useEffect(()=>{
         fetchTopPerformer();
-    }, []);
+    }, [fetchTopPerformer]);
 
     return {
         topPerformer,

@@ -1,3 +1,5 @@
+"use client"
+
 import { QuizCard } from "./quiz-card";
 import { QuizGrid } from "./quiz-grid";
 

@@ -1,3 +1,5 @@
+"use client"
+
 import { ReactElement, ReactNode } from "react";
 import { EButtonSize, EButtonVariant } from "@/enums";
 import { Loader2 } from "lucide-react";

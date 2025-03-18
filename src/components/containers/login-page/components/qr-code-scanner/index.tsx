@@ -1,3 +1,4 @@
+"use client"
 
 import { EToastMessage } from "@/enums";
 import clsx from "clsx";

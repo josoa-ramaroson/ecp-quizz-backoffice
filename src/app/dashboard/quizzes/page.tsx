@@ -1,9 +1,19 @@
 "use client"
-import { DashboardLayout, QuizzesPage } from '@/components'
 import authHoc from '@/lib/hoc/auth-hoc';
+import dynamic from 'next/dynamic'
+ 
+const DashboardLayout = dynamic(
+  () => import('@/components/layout/dashboard-layout'),
+  { ssr: false }
+)
+ 
+const QuizzesPage = dynamic(
+  () => import('@/components/containers/quizzes-page'),
+  { ssr: false }
+)
+ 
 
-
-function Page() {
+function QuizzesPageRoute() {
   return (
     <DashboardLayout>
       <QuizzesPage />
@@ -11,4 +21,4 @@ function Page() {
   )
 }
 
-export default authHoc(Page);
+export default authHoc(QuizzesPageRoute);

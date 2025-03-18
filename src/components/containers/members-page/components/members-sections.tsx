@@ -1,3 +1,5 @@
+"use client"
+
 import { IMember } from '@/interfaces'
 import { 
     SortingState, 

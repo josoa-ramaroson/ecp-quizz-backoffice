@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui'
 import { EButtonSize, EButtonVariant } from '@/enums'
 import { IMember } from '@/interfaces'

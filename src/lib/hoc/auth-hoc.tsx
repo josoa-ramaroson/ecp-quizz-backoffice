@@ -1,41 +1,30 @@
-// Modified authHoc.tsx
+"use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccessToken } from "@/store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import dynamic from "next/dynamic";
 
-const authHoc = <P extends object>(Component: React.ComponentType<P>) => {
+const AuthWrapper = <P extends object>(Component: React.ComponentType<P>) => {
   const WrappedComponent = (props: P) => {
     const router = useRouter();
-    const { accessToken, verifyAccessToken } = useAccessToken();
+    const { verifyAccessToken, accessToken } = useAccessToken();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [isBrowser, setIsBrowser] = useState(false);
-
-    // Check if we're in the browser
-    useEffect(() => {
-      setIsBrowser(true);
-    }, []);
 
     useEffect(() => {
-      if (isBrowser) {
-        const checkAuth = async () => {
-          if (!verifyAccessToken()) {
-            router.replace("/login");
-          } else {
-            setIsAuthenticated(true);
-          }
-          setIsLoading(false);
-        };
-  
-        checkAuth();
-      }
-    }, [accessToken, router, verifyAccessToken, isBrowser]);
+      const checkAuth = async () => {
+        if (!verifyAccessToken()) {
+          router.replace("/login");
+        } else {
+          setIsAuthenticated(true);
+        }
+        setIsLoading(false);
+      };
 
-    // During SSR, just render nothing or a loading state
-    if (!isBrowser) {
-      return null; // or return a simple loading indicator
-    }
+      checkAuth();
+    }, [router, accessToken]);
 
     if (isLoading) {
       return <LoadingSpinner />;
@@ -43,10 +32,14 @@ const authHoc = <P extends object>(Component: React.ComponentType<P>) => {
 
     return isAuthenticated ? <Component {...props} /> : null;
   };
-  
-  WrappedComponent.displayName = `WithAuth(${Component.displayName || Component.name || 'Component'})`;
-  
+
+  WrappedComponent.displayName = `WithAuth(${Component.displayName || Component.name || "Component"})`;
+
   return WrappedComponent;
 };
+
+// Dynamically wrap the auth HOC to ensure it's client-side only
+const authHoc = <P extends object>(Component: React.ComponentType<P>) =>
+  dynamic(() => Promise.resolve(AuthWrapper(Component)), { ssr: false });
 
 export default authHoc;
