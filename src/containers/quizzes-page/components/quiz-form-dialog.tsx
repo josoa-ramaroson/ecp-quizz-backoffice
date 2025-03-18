@@ -95,7 +95,8 @@ export function QuizFormDialog({
 
       handleApiExceptions(async ()=>{
         data.deadline.setUTCHours(23, 59, 59);
-        data.startDate.setUTCHours(0,0,0);
+        data.deadline.setHours(23, 59, 59);
+        data.startDate.setHours(0,0,0);
        
       if (quiz) {
           await updateQuiz({
