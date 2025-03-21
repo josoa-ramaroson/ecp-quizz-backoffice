@@ -1,6 +1,4 @@
 "use client"
-
-import { IQuiz } from "@/interfaces";
 import { TQuizFormValues } from "@/types";
 import { BaseService } from "./base.service";
 export class QuizzesService extends BaseService {
@@ -13,14 +11,14 @@ export class QuizzesService extends BaseService {
         return this.makeRequests("/quizzes");
     }
 
-    static async create(quiz:TQuizFormValues) {
-        return this.makeRequests("/quizzes", "POST", quiz);
+    static async create(quiz: TQuizFormValues) {
+        return this.makeRequests("/quizzes", "POST", this.formatQuizbody(quiz));
     }
 
-    static async update(quiz:IQuiz) {
-        return this.makeRequests(`/quizzes/${quiz._id}`, "PUT", quiz);
+    static async update(quiz: TQuizFormValues) {
+        console.log(this.formatQuizbody(quiz));
+        return this.makeRequests(`/quizzes/${quiz._id}`, "PUT", this.formatQuizbody(quiz));
     }
-
 
     static async removeQuestionFromAllQuizzes(questionId: string) {
         return this.makeRequests(`/quizzes/question/${questionId}`, "DELETE");
@@ -41,4 +39,13 @@ export class QuizzesService extends BaseService {
     static async getUpComing() {
         return this.makeRequests("/quizzes/upcoming");
     }
+
+    static formatQuizbody(quiz: TQuizFormValues):TQuizBody  {
+        return { ...quiz, startDate: quiz.startDate.toISOString(), deadline: quiz.deadline.toISOString() }
+    }
+}
+
+type TQuizBody = Omit<TQuizFormValues, "startDate" | "deadline"> & { 
+    startDate: string;
+    deadline: string;
 }

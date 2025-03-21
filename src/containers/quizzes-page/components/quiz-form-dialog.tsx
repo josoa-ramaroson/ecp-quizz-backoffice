@@ -21,6 +21,7 @@ import { useQuizStore } from "@/store"
 import { handleApiExceptions } from "@/lib/utils"
 import { QuestionSelector } from "./question-selector"
 import { BUTTON_VARIANT_CLASSNAME } from "@/constants"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
 
 interface QuizFormDialogProps {
   open: boolean
@@ -39,10 +40,10 @@ export function QuizFormDialog({
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   const defaultStartDate = new Date();
-  defaultStartDate.setUTCHours(0,0,0);
+  defaultStartDate.setHours(0,0,0);
   
-  const defaultDeadline = new Date(Date.now() + 24 * 60 * 60 * 1000);
-  defaultDeadline.setUTCHours(23,59,59);
+  const defaultDeadline = new Date(Date.now());
+  defaultDeadline.setHours(23,59,59);
 
   const form = useForm<TQuizFormValues>({
     resolver: zodResolver(quizFormSchema),
@@ -58,7 +59,8 @@ export function QuizFormDialog({
   })
 
   useEffect(() => {
-    if (quiz) {        
+    if (quiz) {   
+      console.log(quiz);     
       form.reset({
         _id: quiz._id,
         title: quiz.title,
@@ -92,24 +94,29 @@ export function QuizFormDialog({
   const onSubmit = async (data: TQuizFormValues) => {
     try {
       setIsSubmitting(true)
-
-      handleApiExceptions(async ()=>{
-        data.deadline.setUTCHours(23, 59, 59);
-        data.deadline.setHours(23, 59, 59);
-      
-      if (quiz) {
+      console.log("data without format: ", data);
+      handleApiExceptions(async () => {
+        
+        if (quiz) {
+          
+          const startDate = data.startDate ;
+          const deadline = data.deadline;
+          deadline.setHours(23, 59, 59, 59);
+          startDate.setHours(0, 0, 0, 0);
           await updateQuiz({
             ...data,
             _id: quiz._id,
             creationDate: quiz.creationDate,
+            startDate,
+            deadline,
           } as IQuiz)
         } else {
-          await createQuiz({...data, deadline:  data.deadline} )
+          await createQuiz(data);
         }
       })
 
-      onOpenChange(false)
       handleClose()
+      onOpenChange(false)
     } catch (error) {
       console.error("Error submitting quiz:", error)
       toast.error(EToastMessage.FAILED_TO_SAVE_QUIZ)
@@ -117,6 +124,7 @@ export function QuizFormDialog({
       setIsSubmitting(false)
     }
   }
+  if (isSubmitting) return <LoadingSpinner />
 
   return (
     <Dialog

@@ -8,6 +8,7 @@ export const useQuizStore = create<IQuizStore>((set, get) => ({
     quizzes: [],
     isLoading: false,
     error: null,
+
     refreshQuizzes: async () => {
         set({ isLoading: true });
         try {
@@ -19,6 +20,7 @@ export const useQuizStore = create<IQuizStore>((set, get) => ({
             throw err;
         }
     },
+
     createQuiz: async (quiz: TQuizFormValues) => {
         try {
             const createdQuiz = await QuizzesService.create(quiz);
@@ -30,7 +32,8 @@ export const useQuizStore = create<IQuizStore>((set, get) => ({
             throw err;
         }
     },
-    updateQuiz: async (quiz) => {
+
+    updateQuiz: async (quiz: TQuizFormValues) => {
         try {
             const updatedQuiz = await QuizzesService.update(quiz);
             set({ quizzes: get().quizzes.map((q) => (q._id === quiz._id ? updatedQuiz : q)) });
@@ -41,6 +44,7 @@ export const useQuizStore = create<IQuizStore>((set, get) => ({
             throw err;
         }
     },
+    
     deleteQuiz: async (id) => {
         try {
             await QuizzesService.delete(id);
